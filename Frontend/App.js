@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Button, ScrollView } from "react-native";
 
 const App = () => {
   const [data, setData] = useState(null);
@@ -9,15 +9,15 @@ const App = () => {
   const fetchWeatherData = () => {
     setLoading(true);
     setError(null);
-    
-    fetch('http://localhost:5213/WeatherForecast')
-      .then(response => response.json())
-      .then(data => {
+
+    fetch("http://localhost:5213/WeatherForecast")
+      .then((response) => response.json())
+      .then((data) => {
         setData(data);
         setLoading(false);
       })
-      .catch(error => {
-        console.error('There was an error!', error);
+      .catch((error) => {
+        console.error("There was an error!", error);
         setError(error);
         setLoading(false);
       });
@@ -26,10 +26,9 @@ const App = () => {
   return (
     <View style={styles.container}>
       <Button title="Load Weather Data" onPress={fetchWeatherData} />
-      
+
       {loading && <Text>Loading...</Text>}
-      {error && <Text>Error fetching data.... {JSON.stringify(error)}</Text>
-      }
+      {error && <Text>Error fetching data.... {JSON.stringify(error)}</Text>}
       {data && <Text>{JSON.stringify(data, null, 2)}</Text>}
     </View>
   );
@@ -38,8 +37,8 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
   },
 });
