@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.WebHost.UseUrls("http://0.0.0.0:5213"); // Or "http://192.168.50.210:5213" for a specific IP
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("AppDb"));
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
@@ -19,9 +20,7 @@ builder.Services.AddCors(
     options.AddDefaultPolicy(
       builder =>
       {
-        builder.WithOrigins("http://localhost:8081");
-        builder.AllowAnyHeader();
-        builder.AllowAnyMethod();
+        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
       });
   }
 );

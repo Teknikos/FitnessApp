@@ -1,6 +1,7 @@
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Button } from "react-native-paper";
 
 export default function HomeScreen() {
   const [data, setData] = useState(null);
@@ -11,8 +12,11 @@ export default function HomeScreen() {
     setLoading(true);
     setError(null);
 
-    fetch("http://localhost:5213/WeatherForecast")
-      .then((response) => response.json())
+    fetch("http://192.168.50.210:5213/WeatherForecast")
+      .then((response) => {
+        console.log("response", response);
+        return response.json();
+      })
       .then((data) => {
         setData(data);
         setLoading(false);
@@ -25,15 +29,16 @@ export default function HomeScreen() {
   };
   return (
     <SafeAreaProvider>
+      <View style={styles.container}>
+        <Text>Home Screen</Text>
+        <Button onPress={fetchWeatherData} mode="contained">
+          Load Weather Data
+        </Button>
 
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Button title="Load Weather Data" onPress={fetchWeatherData} />
-
-      {loading && <Text>Loading...</Text>}
-      {error && <Text>Error fetching data.... {JSON.stringify(error)}</Text>}
-      {data && <Text>{JSON.stringify(data, null, 2)}</Text>}
-    </View>
+        {loading && <Text>Loading...</Text>}
+        {error && <Text>Error fetching data.... {JSON.stringify(error)}</Text>}
+        {data && <Text>{JSON.stringify(data, null, 2)}</Text>}
+      </View>
     </SafeAreaProvider>
   );
 }
