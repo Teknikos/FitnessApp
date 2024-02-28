@@ -1,5 +1,6 @@
 import { View, Text, Button, StyleSheet } from "react-native";
 import React, { useState } from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const [data, setData] = useState(null);
@@ -23,6 +24,8 @@ export default function HomeScreen() {
       });
   };
   return (
+    <SafeAreaProvider>
+
     <View style={styles.container}>
       <Text>Home Screen</Text>
       <Button title="Load Weather Data" onPress={fetchWeatherData} />
@@ -31,6 +34,7 @@ export default function HomeScreen() {
       {error && <Text>Error fetching data.... {JSON.stringify(error)}</Text>}
       {data && <Text>{JSON.stringify(data, null, 2)}</Text>}
     </View>
+    </SafeAreaProvider>
   );
 }
 
