@@ -1,9 +1,8 @@
 import  React, { useState } from "react";
-import { View, Text, StyleSheet, Button, ScrollView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "react-native-paper/react-navigation";
 import HomeScreen from "./screens/HomeScreen";
-import SettingsScreen from "./screens/SettingsScreen";
+import UserScreen from "./screens/UserScreen";
 import { PaperProvider } from "react-native-paper";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -19,9 +18,9 @@ const App = () => {
             component={HomeScreen}
           />
           <Tab.Screen
-            options={{ tabBarLabel: "Settings", tabBarIcon: "cog" }}
-            name="Settings"
-            component={SettingsScreen}
+            options={{ tabBarLabel: "User", tabBarIcon: "account" }}
+            name="Register"
+            component={UserScreen}
           />
         </Tab.Navigator>
       </NavigationContainer>
