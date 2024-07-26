@@ -1,7 +1,8 @@
 import { View, Text, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Button } from "react-native-paper";
+import { Button, Icon } from "react-native-paper";
+import { Logo } from '../assets/logo'
 
 export default function HomeScreen() {
   const [data, setData] = useState(null);
@@ -37,6 +38,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaProvider>
       <View style={styles.container}>
+       
         <Text>Home Screen</Text>
         <Button onPress={fetchWeatherData} mode="contained">
           Load Weather Data
